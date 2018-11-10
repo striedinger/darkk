@@ -11,6 +11,7 @@
 		DE9E776A219783AB00F0527B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9E7769219783AB00F0527B /* ViewController.swift */; };
 		DE9E776C219783AC00F0527B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9E776B219783AC00F0527B /* Assets.xcassets */; };
 		DE9E776F219783AC00F0527B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9E776D219783AC00F0527B /* Main.storyboard */; };
+		DE9E77782197840A00F0527B /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9E77772197840A00F0527B /* DarkMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		DE9E776E219783AC00F0527B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE9E7770219783AC00F0527B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE9E7771219783AC00F0527B /* darkk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = darkk.entitlements; sourceTree = "<group>"; };
+		DE9E77772197840A00F0527B /* DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		DE9E7766219783AB00F0527B /* darkk */ = {
 			isa = PBXGroup;
 			children = (
+				DE9E77772197840A00F0527B /* DarkMode.swift */,
 				DE9E7767219783AB00F0527B /* AppDelegate.swift */,
 				DE9E7769219783AB00F0527B /* ViewController.swift */,
 				DE9E776B219783AC00F0527B /* Assets.xcassets */,
@@ -95,6 +98,11 @@
 				TargetAttributes = {
 					DE9E7763219783AB00F0527B = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -133,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9E77782197840A00F0527B /* DarkMode.swift in Sources */,
 				DE9E776A219783AB00F0527B /* ViewController.swift in Sources */,
 				DE9E7768219783AB00F0527B /* AppDelegate.swift in Sources */,
 			);
@@ -272,8 +281,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = darkk/darkk.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WN8NCHXBUC;
 				INFOPLIST_FILE = darkk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -281,6 +292,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.striedinger.darkk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -290,8 +302,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = darkk/darkk.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WN8NCHXBUC;
 				INFOPLIST_FILE = darkk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,6 +313,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.striedinger.darkk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
