@@ -12,7 +12,8 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
-    let startHour = 8, startMinute = 0, endHour = 22, endMinute = 0
+    let startHour = 8, startMinute = 0, endHour = 21, endMinute = 54
+    var timer:Timer?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
@@ -21,6 +22,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         constructMenu()
         checkRange()
+        setTimer()
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(awakeListener), name: NSWorkspace.didWakeNotification, object: nil)
+    }
+    
+    func setTimer() {
+        if(timer != nil) { timer!.invalidate() }
+        let calendar = Calendar.current
+        var comps = calendar.dateComponents([.era, .year, .month, .day, .hour, .minute], from: Date())
+        comps.minute = comps.minute! + 1
+        let nextMinute = calendar.date(from: comps)
+        timer = Timer(fire: nextMinute!, interval: 60, repeats: true) { _ in
+            self.checkRange()
+        }
+        RunLoop.current.add(timer!, forMode: .common)
+    }
+    
+    @objc func awakeListener(aNotification:NSNotification) {
+        if(aNotification.name == NSWorkspace.didWakeNotification) {
+            checkRange()
+            setTimer()
+        }
     }
     
     @objc func toggleMode(_ sender: Any?) {
@@ -35,7 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = menu
     }
     
-    func checkRange() {
+    @objc func checkRange() {
+        print("checking range")
         let calendar = Calendar.current
         let now = NSDate()
         let nowDateValue = now as Date
