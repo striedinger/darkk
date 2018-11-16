@@ -12,6 +12,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
+    let startHour = 8, startMinute = 0, endHour = 22, endMinute = 0
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
@@ -19,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(toggleMode(_:))
         }
         constructMenu()
+        checkRange()
     }
     
     @objc func toggleMode(_ sender: Any?) {
@@ -31,6 +33,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         statusItem.menu = menu
+    }
+    
+    func checkRange() {
+        let calendar = Calendar.current
+        let now = NSDate()
+        let nowDateValue = now as Date
+        let start = calendar.date(bySettingHour: startHour, minute: startMinute, second: 0, of: nowDateValue)
+        let end = calendar.date(bySettingHour: endHour, minute: endMinute, second: 0, of: nowDateValue)
+        if nowDateValue >= start! && nowDateValue <= end! {
+            if(DarkMode.isEnabled) {
+                DarkMode.toggle(force: false)
+            }
+        }else {
+            if(!DarkMode.isEnabled) {
+                DarkMode.toggle(force: true)
+            }
+        }
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
